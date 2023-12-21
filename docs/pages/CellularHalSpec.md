@@ -11,7 +11,7 @@ The diagram below describes a high-level software architecture of the Cellular M
 
 ![Cellular HAL Architecture Diag](images/Cellular_HAL_Architecture.png)
 
-Cellular Manager HAL is an abstraction layer, implemented to interact with vendor software's for getting the hardware specific details such as Firmware version and resettting/rebooting the modem
+Cellular Manager HAL is an abstraction layer, implemented to interact with vendor software's for managing access to cellular network, managing cellular modem power configuration, exposing radio resources information of the cellular interface, managing SIM use etc.
 
 ## Component Runtime Execution Requirements
 

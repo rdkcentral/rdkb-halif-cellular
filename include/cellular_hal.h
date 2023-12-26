@@ -267,17 +267,14 @@ typedef  struct
                       
     char APN[64];                                    /**< @brief It represents the Access Point Name of the gateway.
                                                          It is a character array.
-                                                         The buffer size should not exceed 64 bytes.
                                                          It is a vendor specific value. */
 
     char Username[256];                              /**< @brief It represents the username.
                                                          It is a character array.
-                                                         The buffer size should not exceed 256 bytes.
                                                          It is a vendor specific value. */
                               
     char Password[256];                              /**< @brief It represents the password.
                                                          It is a character array.
-                                                         The buffer size should not exceed 256 bytes.
                                                          It is a vendor specific value. */
 
     char Proxy[45];                                  /**< @brief It stores the IP address of the proxy server that the device uses to connect to network.
@@ -290,16 +287,13 @@ typedef  struct
                                                          It is a vendor specific value. */
 
     unsigned char bIsNoRoaming;                      /**< @brief It indicates whether the device is currently roaming on another network.
-                                                         It is of unsigned char datatype. 
-                                                         The possible value is TRUE or False. */
+                                                         It is of unsigned char datatype. */
 
     unsigned char bIsAPNDisabled;                    /**< @brief It indicates whether the device’s access point name is disabled.
-                                                         It is of unsigned char datatype. 
-                                                         The possible value is TRUE or False. */
+                                                         It is of unsigned char datatype. */
 
     unsigned char bIsThisDefaultProfile;             /**< @brief It indicates whether the current configuration is the default profile for the device.
-                                                         It is of unsigned char datatype. 
-                                                         The possible value is TRUE or False. */
+                                                         It is of unsigned char datatype. */
 } CellularProfileStruct;
 
 /**
@@ -466,16 +460,13 @@ typedef enum _CellularUICCApplication_t
 typedef  struct
 {
     unsigned char SlotEnable;                    /**< @brief It represents the slot status.
-                                                     It is of unsigned character datatype. 
-                                                     The possible values are TRUE / FALSE. */
+                                                     It is of unsigned character datatype. */
 
     unsigned char IsCardPresent;                 /**< @brief It represents the card status.
-                                                     It is of unsigned character datatype. 
-                                                     The possible values are TRUE / FALSE. */
+                                                     It is of unsigned character datatype. */
 
     unsigned char CardEnable;                    /**< @brief It represents the slot status.
-                                                     It is of unsigned character datatype. 
-                                                     The possible values are TRUE / FALSE. */
+                                                     It is of unsigned character datatype. */
 
     CellularUICCFormFactor_t FormFactor;         /**< @brief It represents the form factor of a Universal Integrated Circuit Card used in cellular devices.
                                                      Is from the enumerated datatype CellularUICCFormFactor_t.
@@ -490,15 +481,12 @@ typedef  struct
                                                      Possible value is 0,1,2 and 3. */
 
     char MnoName[32];                            /**< @brief It represents the mobile newtwork operator name who provides the service.
-                                                     It is a 32 byte character datatype. 
                                                      It is a vendor specific value. */
 
     char iccid[20];                              /**< @brief It represents the Integrated Circuit Card id.
-                                                     It is a 20 byte character datatype. 
                                                      It is a vendor specific value. */
 
     char msisdn[20];                             /**< @brief It a number uniquely identifying a subscription in a Global System for Mobile communications.
-                                                     It is a 20 byte character datatype. 
                                                      It is a vendor specific value. */
 } CellularUICCSlotInfoStruct;
 
@@ -609,8 +597,7 @@ typedef  struct
                                                   MNC is a 3 digit number ranges from 000 to 999. */
 
     unsigned char network_allowed_flag;       /**< @brief It represents if the network is allowed or not.
-                                                  It is of unsigned character datatype.
-                                                  The possible values are TRUE / FALSE. */
+                                                  It is of unsigned character datatype. */
 } CellularNetworkScanResultInfoStruct;
 
 /**
@@ -726,6 +713,14 @@ typedef enum _CellularNetworkPacketStatus_t
 /**********************************************************************
                 FUNCTION PROTOTYPES
 **********************************************************************/
+
+/*
+ * TODO:
+ *
+ * 1. Extend the return codes by listing out the possible reasons of failure, to improve the interface in the future.
+ *    This was reported during the review for header file migration to opensource github.
+ *
+ */
 
 /**
 * @brief - Returns Modem Device Available Status
@@ -868,8 +863,7 @@ int cellular_hal_select_device_slot(cellular_device_slot_status_api_callback dev
 *
 * @param[in] slot_id variable is a unsigned integer will intimate to lower layer to slot id to be enable/disable
 *                      \n The possible values can be 1 or 2 and depends on number of SIM slots provided by vendor.
-* @param[in] enable variable is a unsigned character will intimate to lower layer to enable/disable UICC power
-*                      \n The possible values are TRUE / FALSE.
+* @param[in] enable variable is a unsigned character will intimate to lower layer to enable/disable UICC power.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful

@@ -770,8 +770,6 @@ typedef int (*cellular_device_open_status_api_callback)( char *device_name, char
 *                      \n It is a vendor specific value.
 * @param[in] device_detection_status variable is from the enumerated datatype.
 *                                   \n It can hold any value from enum CellularDeviceDetectionStatus_t.  
-* @param[in] device_open_status_cb is a structure member of cellular_device_open_status_api_callback function.
-* @param[in] device_remove_status_cb is a structure member of cellular_device_removed_status_api_callback function.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -931,9 +929,6 @@ typedef int (*cellular_device_registration_status_callback)( CellularDeviceNASSt
 * @brief - This API inform lower layer to monitor device registration
 *
 * @param[in] device_registration_status_cb is a function pointer which receives device registration status response from lower layer.
-* @param[in] device_registration_status variable is from the enumerated datatype CellularDeviceNASStatus_t.
-* @param[in] roaming_status variable is from the enumerated datatype CellularDeviceNASRoamingStatus_t.
-* @param[in] registered_service variable is from the enumerated datatype CellularModemRegisteredServiceType_t.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -1032,8 +1027,6 @@ typedef int (*cellular_network_packet_service_status_api_callback)( char *device
 *
 * @param[in] pstIPStruct variable is a structure pointer from CellularIPStruct.
 * @param[in] ip_ready_status variable is from the enumerated datatype CellularDeviceIPReadyStatus_t.
-* @param[in] device_network_ip_ready_cb is from cellular_device_network_ip_ready_api_callback function.
-* @param[in] packet_service_status_cb variable is from cellular_network_packet_service_status_api_callback function.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -1075,7 +1068,6 @@ int cellular_hal_start_network( CellularNetworkIPType_t ip_request_type, Cellula
 /**
 * @brief - This API inform lower layer to stop network based on valid ip request type.
 *
-* @param[in] iprequest_type variable is from the enumerated datatype CellularNetworkIPType_t which receives IP configuration for stopped network from driver.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -1241,7 +1233,7 @@ int cellular_hal_get_current_plmn_information(CellularCurrentPlmnInfoStruct *plm
 /**
 * @brief - This API get current active card status information from modem
 *
-* @param[out] CellularNetworkScanResultInfoStruct is a structure CellularNetworkScanResultInfoStruct filled with available networks information from Modem.
+* @param[out] network_info is a structure CellularNetworkScanResultInfoStruct filled with available networks information from Modem.
 * @param[out] total_network_count variable is a unsigned integer pointer filled with total no of available networks.
 *                                   \n The possible range of acceptable values is 0 to 1100000. Example: 5
 *

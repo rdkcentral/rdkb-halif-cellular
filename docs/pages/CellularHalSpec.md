@@ -25,7 +25,9 @@ The below mentioned initialization API initializes the Cellular HAL layers/code.
 
 ## Threading Model
 
-Cellular HAL is not thread safe, any module which is invoking the Cellular HAL api should ensure calls are made in a thread safe manner.
+Cellular HAL is not thread safe.
+
+Any module which is invoking the Cellular HAL api should ensure calls are made in a thread safe manner.
 
 Vendors can create internal threads/events to meet their operation requirements.  These should be responsible to synchronize between the calls, events and cleaned up on closure.
 
@@ -93,7 +95,7 @@ There should not be any memory leaks/corruption introduced by HAL and underneath
 
 ## Licensing
 
-Cellular HAL implementation is expected to released under the Apache License. 
+Cellular HAL implementation is expected to released under the Apache License 2.0.
 
 ## Build Requirements
 

@@ -7,9 +7,16 @@
 - `OEM` \- Original Equipment Manufacture
 
 ## Description
-The diagram below describes a high-level software architecture of the Cellular Manager HAL module stack. 
 
-![Cellular HAL Architecture Diag](images/Cellular_HAL_Architecture.png)
+The diagram below describes a high-level software architecture of the Cellular Manager HAL module stack.
+
+```mermaid
+
+flowchart
+    Caller <--> HALIF[HAL Interface - cellular_hal.h\n`HAL IF Specifcation / Contract Requirement`]
+    HALIF <--> VendorWrapper[HAL\nVendor Implementation]
+    VendorWrapper <--> VendorDrivers[Vendor Drivers\nImplementation]
+```
 
 Cellular Manager HAL is an abstraction layer, implemented to interact with vendor software's for managing access to cellular network, managing cellular modem power configuration, exposing radio resources information of the cellular interface, managing SIM use etc.
 
@@ -37,8 +44,14 @@ All API's are expected to be called from multiple process.
 
 ## Memory Model
 
-Cellular HAL client module is responsible to allocate and deallocate memory for necessary API's as specified in API Documentation.
-Different 3rd party vendors allowed to allocate memory for internal operational requirements. In this case 3rd party implementations should be responsible to deallocate internally.
+### Caller Responsibilities
+
+Manage memory passed to specific functions as outlined in the API documentation. This includes allocation and proper deallocation to prevent leaks.
+
+### Module Responsibilities
+
+Handle and deallocate memory used for its internal operations.
+Release all internally allocated memory upon closure to prevent leaks.
 
 TODO:
 State a footprint requirement. Example: This should not exceed XXXX KB.
@@ -46,7 +59,6 @@ State a footprint requirement. Example: This should not exceed XXXX KB.
 ## Power Management Requirements
 
 The Cellular HAL is not involved in any of the power management operation.
-Any power management state transitions MUST not affect the operation of the Cellular HAL. 
 
 ## Asynchronous Notification Model
 
@@ -54,7 +66,7 @@ There are no asynchronous notifications.
 
 ## Blocking calls
 
-Cellular HAL API's are expected to work synchronously and should complete within a time period commensurate with the complexity of the operation and in accordance with any relevant specification. 
+Cellular HAL API's are expected to work synchronously and should complete within a time period commensurate with the complexity of the operation and in accordance with any relevant specification.
 Any calls that can fail due to the lack of a response should have a timeout period in accordance with any relevant documentation.
 
 TODO:
@@ -78,7 +90,7 @@ Cellular HAL component should log all the error and critical informative message
 
 The logging should be consistent across all HAL components.
 
-If the vendor is going to log then it has to be logged in `xxx_vendor_hal.log` file name which can be placed in `/rdklogs/logs/` or `/var/tmp/` directory.
+If the vendor is going to log then it has to be logged in `cellular_vendor_hal.log` file name which can be placed in `/rdklogs/logs/` or `/var/tmp/` directory.
 
 Logging should be defined with log levels as per Linux standard logging.
 
@@ -88,10 +100,9 @@ Make sure Cellular HAL is not contributing more to memory and CPU utilization wh
 
 ## Quality Control
 
-Cellular HAL implementation should pass checks using any third party tools like `Coverity`, `Black duck`, `Valgrind` etc. without any issue to ensure quality.
+Both HAL wrapper and 3rd party software implementations should prioritize robust memory management to guarantee leak-free and corruption-resistant operation.
 
-There should not be any memory leaks/corruption introduced by HAL and underneath 3rd party software implementation.
-
+Passing checks by using any third-party tools like `Coverity`, `Black duck`, `Valgrind`, etc. without any issue to ensure quality. While optional, using these tools is considered a best practice.
 
 ## Licensing
 
@@ -114,8 +125,8 @@ None
 ## Interface API Documentation
 
 All HAL function prototypes and datatype definitions are available in `cellular_hal.h` file.
-    
-  1. Components/Process must include `cellular_modem_hal_api.h` to make use of Cellular Manager hal capabilities.
+
+  1. Components/Process must include `cellular_hal.h` to make use of Cellular Manager hal capabilities.
   2. Components/Process should add linker dependency for `cellularmanager` binary.
 
 ## Theory of operation and key concepts

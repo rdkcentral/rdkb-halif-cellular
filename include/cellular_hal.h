@@ -241,9 +241,7 @@ typedef  struct
                                                          It is of integer datatype. 
                                                          The value should not exceed (2^31)-1. */   
     
-    CellularProfileType_t ProfileType;               /**< @brief It represents the profile type.
-                                                         Is from the enumerated datatype CellularProfileType_t. 
-                                                         Possible value is 0 and 1. */
+    CellularProfileType_t ProfileType;               /**< @brief represents the profile type. */
     
     int PDPContextNumber;                            /**< @brief It represents the Packet Data Protocol number.
                                                          It is of integer datatype. 

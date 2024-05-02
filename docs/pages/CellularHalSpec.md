@@ -74,7 +74,7 @@ As we state that they should complete within a time period, we need to state wha
 
 ## Internal Error Handling
 
-All the Cellular HAL API's should return error synchronously as a return argument. HAL is responsible to handle system errors(e.g. out of memory) internally.
+All the Broadband Cellular HAL APIs should return error synchronously as a return argument. While HAL is responsible for managing internal system errors, such as out of memory conditions, it's important to note that the interface level may not always handle recovery from severe system errors effectively. Instead, HAL should prioritize graceful handling of recoverable errors and logging critical issues for further investigation and resolution.
 
 ## Persistence Model
 
@@ -86,13 +86,13 @@ Following non functional requirement should be supported by the Cellular HAL com
 
 ## Logging and debugging requirements
 
-Cellular HAL component should log all the error and critical informative messages, preferably using syslog, printf which helps to debug/triage the issues and understand the functional flow of the system.
+The component should log all the error and critical informative messages, preferably using syslog, printf which helps to debug/triage the issues and understand the functional flow of the system.
 
 The logging should be consistent across all HAL components.
 
-If the vendor is going to log then it has to be logged in `cellular_vendor_hal.log` file name which can be placed in `/rdklogs/logs/` or `/var/tmp/` directory.
+If the vendor is going to log then it has to be logged in cellular_vendor_hal.log file name which can be placed in /rdklogs/logs/ directory.
 
-Logging should be defined with log levels as per Linux standard logging.
+Logging should be defined with log levels as per Linux standard logging. The logging levels specified by the Linux standard logging, in descending order of severity, are FATAL, ERROR, WARNING, NOTICE, INFO, DEBUG, TRACE.
 
 ## Memory and performance requirements
 

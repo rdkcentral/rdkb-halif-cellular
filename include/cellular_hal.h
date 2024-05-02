@@ -237,61 +237,41 @@ typedef enum _CellularRegistrationStatus_t
  */
 typedef  struct
 {
-    int ProfileID;                                   /**< @brief It represents the profile ID.
-                                                         It is of integer datatype. 
-                                                         The value should not exceed (2^31)-1. */   
+    int ProfileID;                                   /**< It represents the profile ID.*/   
     
-    CellularProfileType_t ProfileType;               /**< @brief represents the profile type. */
+    CellularProfileType_t ProfileType;               /**< It represents the profile type. */
     
-    int PDPContextNumber;                            /**< @brief It represents the Packet Data Protocol number.
-                                                         It is of integer datatype. 
-                                                         The value should not exceed (2^31)-1. */
+    int PDPContextNumber;                            /**< It represents the Packet Data Protocol number. */
     
-    CellularPDPType_t PDPType;                       /**< @brief It represents the Packet Data Protocol type.
-                                                         Is from the enumerated datatype CellularPDPType_t. 
-                                                         Possible value is 0,1,2 and 3. */                      
+    CellularPDPType_t PDPType;                       /**< It represents the Packet Data Protocol type. */                      
     
-    CellularPDPAuthentication_t PDPAuthentication;   /**< @brief It represents the Packet Data Protocol authentication type.
-                                                         Is from the enumerated datatype CellularPDPAuthentication_t. 
-                                                         Possible value is 0,1 and 2. */
+    CellularPDPAuthentication_t PDPAuthentication;   /**< It represents the Packet Data Protocol authentication type. */
     
-    CellularPDPNetworkConfig_t PDPNetworkConfig;     /**< @brief It represents the Packet Data Protocol network configuration type.
-                                                         Is from the enumerated datatype CellularPDPNetworkConfig_t. 
-                                                         Possible value is 1 and 2. */
+    CellularPDPNetworkConfig_t PDPNetworkConfig;     /**< It represents the Packet Data Protocol network configuration type. */
     
-    char ProfileName[64];                            /**< @brief It represents the name of the profile.
-                                                         It is a character array.
-                                                         It is a vendor specific value. */
+    char ProfileName[64];                            /**< It represents the name of the profile.
+                                                          It is a vendor specific value. */
                       
-    char APN[64];                                    /**< @brief It represents the Access Point Name of the gateway.
-                                                         It is a character array.
-                                                         It is a vendor specific value. */
+    char APN[64];                                    /**< It represents the Access Point Name of the gateway.
+                                                          It is a vendor specific value. */
 
-    char Username[256];                              /**< @brief It represents the username.
-                                                         It is a character array.
-                                                         It is a vendor specific value. */
+    char Username[256];                              /**< It represents the username.
+                                                          It is a vendor specific value. */
                               
-    char Password[256];                              /**< @brief It represents the password.
-                                                         It is a character array.
-                                                         It is a vendor specific value. */
+    char Password[256];                              /**< It represents the password.
+                                                          It is a vendor specific value. */
 
-    char Proxy[45];                                  /**< @brief It stores the IP address of the proxy server that the device uses to connect to network.
-                                                         It is a character array.
-                                                         It is a vendor specific value. */
+    char Proxy[45];                                  /**< It stores the IP address of the proxy server that the device uses to connect to network.
+                                                          It is a vendor specific value. */
 
-    unsigned int ProxyPort;                          /**< @brief It stores the port number that the device should use to connect to the proxy server.
-                                                         It is a character array.
-                                                         The buffer size should not exceed the value 65535.
-                                                         It is a vendor specific value. */
+    unsigned int ProxyPort;                          /**< It stores the port number that the device should use to connect to the proxy server.
+                                                          It is a vendor specific value. */
 
-    unsigned char bIsNoRoaming;                      /**< @brief It indicates whether the device is currently roaming on another network.
-                                                         It is of unsigned char datatype. */
+    unsigned char bIsNoRoaming;                      /**< It indicates whether the device is currently roaming on another network. */
 
-    unsigned char bIsAPNDisabled;                    /**< @brief It indicates whether the device’s access point name is disabled.
-                                                         It is of unsigned char datatype. */
+    unsigned char bIsAPNDisabled;                    /**< It indicates whether the device’s access point name is disabled. */
 
-    unsigned char bIsThisDefaultProfile;             /**< @brief It indicates whether the current configuration is the default profile for the device.
-                                                         It is of unsigned char datatype. */
+    unsigned char bIsThisDefaultProfile;             /**< It indicates whether the current configuration is the default profile for the device. */
 } CellularProfileStruct;
 
 /**
@@ -302,17 +282,14 @@ typedef  struct
  */
 typedef  struct
 {
-    CellularIpFamilyPref_t enIPFamilyPreference;                 /**< @brief It represents IP family for the cellular interface.
-                                                                     Is from the enumerated datatype CellularIpFamilyPref_t. 
-                                                                     Possible value is 1,2,3 and 4. */
+    CellularIpFamilyPref_t enIPFamilyPreference;                 /**< It represents IP family for the cellular interface.
+                                                                      Possible value is 1,2,3 and 4. */
 
-    CellularProfileStruct stIfInput;                             /**< @brief It represents the various interface inputs.
-                                                                     Is from the structure CellularProfileStruct. 
-                                                                     Possible values include APN, username, password etc. */
+    CellularProfileStruct stIfInput;                             /**< It represents the various interface inputs.
+                                                                      Possible values include APN, username, password etc. */
                  
-    CellularPrefAccessTechnology_t enPreferenceTechnology;       /**< @brief It represents the Access Technology for the cellular interface.
-                                                                     Is from the enumerated datatype CellularPrefAccessTechnology_t. 
-                                                                     Possible value is 1,2,3,4,5,6,7,and 8. */
+    CellularPrefAccessTechnology_t enPreferenceTechnology;       /**< It represents the Access Technology for the cellular interface.
+                                                                      Possible value is 1,2,3,4,5,6,7,and 8. */
 } CellularContextInitInputStruct;
 
 /**
@@ -335,41 +312,25 @@ typedef enum _CellularNetworkIPType_t
  */
 typedef  struct
 {
-    char WANIFName[16];                       /**< @brief It represents the name of the WAN interface.
-                                                  It is a character array.
-                                                  Example: "wwan0" */
+    char WANIFName[16];                       /**< It represents the name of the WAN interface.Example: "wwan0" */
 
-    char IPAddress[128];                      /**< @brief It represents IP address of the device.
-                                                  It is a character array.
-                                                  Example: "192.168.1.10" */
+    char IPAddress[128];                      /**< It represents IP address of the device.Example: "192.168.1.10" */
 
-    CellularNetworkIPType_t IPType;           /**< @brief It represents the type of IP address that the cellular network uses.
-                                                  Is from the enumerated datatype CellularNetworkIPType_t.
-                                                  Possible value is 0,1,2 and 3. */
+    CellularNetworkIPType_t IPType;           /**< It represents the type of IP address that the cellular network uses.
+                                                   Possible value is 0,1,2 and 3. */
 
-    char SubnetMask[128];                     /**< @brief It represents the subnet mask of the device.
-                                                  It is a character array.
-                                                  Example: "255.255.255.0" */
+    char SubnetMask[128];                     /**< It represents the subnet mask of the device.Example: "255.255.255.0" */
 
-    char DefaultGateWay[128];                 /**< @brief It represents the IP address of the default gateway.
-                                                  It is a character array.
-                                                  Example: "192.168.1.1" */
+    char DefaultGateWay[128];                 /**< It represents the IP address of the default gateway.Example: "192.168.1.1" */
 
-    char DNSServer1[128];                     /**< @brief It represents the IP address of the primary DNS server.
-                                                  It is a character array.
-                                                  Example: "8.8.8.8" */
+    char DNSServer1[128];                     /**< It represents the IP address of the primary DNS server.Example: "8.8.8.8" */
 
-    char DNSServer2[128];                     /**< @brief It represents the IP address of the secondary DNS server.
-                                                  It is a character array.
-                                                  Example:  "1.1.1.1" */
+    char DNSServer2[128];                     /**< It represents the IP address of the secondary DNS server.Example:  "1.1.1.1" */
 
-    char Domains[256];                        /**< @brief It represents the domain names that the device is associated with.
-                                                  It is a character array.
-                                                  Example:  "hsd.pa.crnrstn.comcast.net" */
+    char Domains[256];                        /**< It represents the domain names that the device is associated with.Example: "hsd.pa.crnrstn.comcast.net" */
 
-    unsigned int MTUSize;                     /**< @brief It represents stores the maximum transmission unit size of the device.
-                                                  It is an unsigned integer.
-                                                  The possible range of acceptable values is 1280 to 9000. */
+    unsigned int MTUSize;                     /**< It represents stores the maximum transmission unit size of the device.
+                                                   The possible range of acceptable values is 1280 to 9000. */
 } CellularIPStruct;
 
 /**
@@ -379,37 +340,21 @@ typedef  struct
  */
 typedef  struct
 {
-    unsigned long BytesSent;                      /**< @brief It represents the total number of bytes sent over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long BytesSent;                      /**< It represents the total number of bytes sent over the cellular network connection. */
 
-    unsigned long BytesReceived;                  /**< @brief It represents the total number of bytes received over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long BytesReceived;                  /**< It represents the total number of bytes received over the cellular network connection. */
 
-    unsigned long PacketsSent;                    /**< @brief It represents the total number of packets sent over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long PacketsSent;                    /**< It represents the total number of packets sent over the cellular network connection. */
 
-    unsigned long PacketsReceived;                /**< @brief It represents the total number of packets received over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long PacketsReceived;                /**< It represents the total number of packets received over the cellular network connection. */
 
-    unsigned long PacketsSentDrop;                /**< @brief It represents  the total number of packets that were dropped while being sent over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long PacketsSentDrop;                /**< It represents  the total number of packets that were dropped while being sent over the cellular network connection. */
 
-    unsigned long PacketsReceivedDrop;            /**< @brief It represents that stores the total number of packets that were dropped while being received over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long PacketsReceivedDrop;            /**< It represents that stores the total number of packets that were dropped while being received over the cellular network connection. */
 
-    unsigned long UpStreamMaxBitRate;             /**< @brief It represents the maximum bit rate for upstream data transfer over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long UpStreamMaxBitRate;             /**< It represents the maximum bit rate for upstream data transfer over the cellular network connection. */
 
-    unsigned long DownStreamMaxBitRate;           /**< @brief It represents the maximum bit rate for downstream data transfer over the cellular network connection.
-                                                      It is of unsigned long integer datatype. 
-                                                      The value should not exceed (2^31)-1. */
+    unsigned long DownStreamMaxBitRate;           /**< It represents the maximum bit rate for downstream data transfer over the cellular network connection. */
 } CellularPacketStatsStruct;
 
 /**
@@ -457,35 +402,29 @@ typedef enum _CellularUICCApplication_t
  */
 typedef  struct
 {
-    unsigned char SlotEnable;                    /**< @brief It represents the slot status.
-                                                     It is of unsigned character datatype. */
+    unsigned char SlotEnable;                    /**< It represents the slot status. */
 
-    unsigned char IsCardPresent;                 /**< @brief It represents the card status.
-                                                     It is of unsigned character datatype. */
+    unsigned char IsCardPresent;                 /**< It represents the card status. */
 
-    unsigned char CardEnable;                    /**< @brief It represents the slot status.
-                                                     It is of unsigned character datatype. */
+    unsigned char CardEnable;                    /**< It represents the slot status. */
 
-    CellularUICCFormFactor_t FormFactor;         /**< @brief It represents the form factor of a Universal Integrated Circuit Card used in cellular devices.
-                                                     Is from the enumerated datatype CellularUICCFormFactor_t.
-                                                     Possible value is 0,1,2 and 3. */
+    CellularUICCFormFactor_t FormFactor;         /**< It represents the form factor of a Universal Integrated Circuit Card used in cellular devices.
+                                                      Possible value is 0,1,2 and 3. */
 
-    CellularUICCApplication_t Application;       /**< @brief It represents type of Universal Integrated Circuit Card application used in cellular devices.
-                                                     Is from the enumerated datatype CellularUICCApplication_t.
-                                                     Possible value is 0,1 and 2. */
+    CellularUICCApplication_t Application;       /**< It represents type of Universal Integrated Circuit Card application used in cellular devices.
+                                                      Possible value is 0,1 and 2. */
 
-    CellularUICCStatus_t Status;                 /**< @brief It represents the status of a Universal Integrated Circuit Card used in cellular devices.
-                                                     Is from the enumerated datatype CellularUICCStatus_t.
-                                                     Possible value is 0,1,2 and 3. */
+    CellularUICCStatus_t Status;                 /**< It represents the status of a Universal Integrated Circuit Card used in cellular devices.
+                                                      Possible value is 0,1,2 and 3. */
 
-    char MnoName[32];                            /**< @brief It represents the mobile newtwork operator name who provides the service.
-                                                     It is a vendor specific value. */
+    char MnoName[32];                            /**< It represents the mobile newtwork operator name who provides the service.
+                                                      It is a vendor specific value. */
 
-    char iccid[20];                              /**< @brief It represents the Integrated Circuit Card id.
-                                                     It is a vendor specific value. */
+    char iccid[20];                              /**< It represents the Integrated Circuit Card id.
+                                                      It is a vendor specific value. */
 
-    char msisdn[20];                             /**< @brief It a number uniquely identifying a subscription in a Global System for Mobile communications.
-                                                     It is a vendor specific value. */
+    char msisdn[20];                             /**< It a number uniquely identifying a subscription in a Global System for Mobile communications.
+                                                      It is a vendor specific value. */
 } CellularUICCSlotInfoStruct;
 
 
@@ -496,25 +435,20 @@ typedef  struct
  */
 typedef  struct
 {
-    int RSSI;                     /**< @brief It represents the strength of a signal.
-                                      It is of integer datatype.
-                                      The value ranges from -30 dBm to -90 dBm. */
+    int RSSI;                     /**< It represents the strength of a signal.
+                                       The value ranges from -30 dBm to -90 dBm. */
 
-    int RSRQ;                     /**< @brief It represents the quality of a received signal.
-                                      It is of integer datatype.
-                                      The value ranges from -3 dB to -19.5 dB. */
+    int RSRQ;                     /**< It represents the quality of a received signal.
+                                       The value ranges from -3 dB to -19.5 dB. */
 
-    int RSRP;                     /**< @brief It represents the average received power of a single RS resource element.
-                                      It is of integer datatype.
-                                      The value ranges from -140 dBm to -44 dBm. */
+    int RSRP;                     /**< It represents the average received power of a single RS resource element.
+                                       The value ranges from -140 dBm to -44 dBm. */
 
-    int SNR;                      /**< @brief It represents the Signal-to-noise ratio.
-                                      It is of integer datatype.
-                                      The value ranges from -20 dB to 30 dB. */
+    int SNR;                      /**< It represents the Signal-to-noise ratio.
+                                       The value ranges from -20 dB to 30 dB. */
 
-    int TXPower;                  /**< @brief It represents the signal level leaving from that device within the transmitter power range.
-                                      It is of integer datatype.
-                                      The value ranges from 0 dBm to 30 dBm. */
+    int TXPower;                  /**< It represents the signal level leaving from that device within the transmitter power range.
+                                       The value ranges from 0 dBm to 30 dBm. */
 } CellularSignalInfoStruct;
 
 /**
@@ -524,16 +458,13 @@ typedef  struct
  */
 typedef struct
 {
-    unsigned int globalCellId;          /**< @brief It represents the unique identifier of the cell in the network.
-                                            It is of unsigned integer datatype.
+    unsigned int globalCellId;          /**< It represents the unique identifier of the cell in the network.
                                             The value ranges from 0 to 68719476735. */
 
-    unsigned int bandInfo;              /**< @brief It represents the frequency band used by the cell.
-                                            It is of unsigned integer datatype.
+    unsigned int bandInfo;              /**< It represents the frequency band used by the cell.
                                             The value ranges from 0 to 32767. */
 
-    unsigned int servingCellId;         /**< @brief It represents the unique identifier of the serving cell.
-                                            It is of unsigned integer datatype.
+    unsigned int servingCellId;         /**< It represents the unique identifier of the serving cell.
                                             The value ranges from 0 to 68719476735. */
 } CellLocationInfoStruct;
 
@@ -544,36 +475,25 @@ typedef struct
  */
 typedef  struct
 {
-    char plmn_name[32];                                            /**< @brief It represents the plmn network information name.
-                                                                       It is of character array datatype. */
+    char plmn_name[32];                                            /**< It represents the plmn network information name. */
 
-    unsigned int MCC;                                              /**< @brief It represents the mobile country code.
-                                                                       It is of unsigned integer datatype.
-                                                                       MCC is a 3 digit number ranges from 000 to 999. */
+    unsigned int MCC;                                              /**< It represents the mobile country code.
+                                                                        MCC is a 3 digit number ranges from 000 to 999. */
 
-    unsigned int MNC;                                              /**< @brief It represents the mobile network code.
-                                                                       It is of unsigned integer datatype.
-                                                                       MNC is a 3 digit number ranges from 000 to 999. */
+    unsigned int MNC;                                              /**< It represents the mobile network code.
+                                                                        MNC is a 3 digit number ranges from 000 to 999. */
 
-    CellularRegistrationStatus_t registration_status;              /**< @brief It represents the registration status.
-                                                                       Is from the enumerated datatype CellularRegistrationStatus_t.
-                                                                       Possible value is 1 and 2. */
+    CellularRegistrationStatus_t registration_status;              /**< It represents the registration status.
+                                                                        Possible value is 1 and 2. */
 
-    CellularModemRegisteredServiceType_t registered_service;       /**< @brief It represents registered service types of cellular modem.
-                                                                       Is from the enumerated datatype CellularModemRegisteredServiceType_t.
-                                                                       Possible value is 0,1,2 and 3. */
+    CellularModemRegisteredServiceType_t registered_service;       /**< It represents registered service types of cellular modem.
+                                                                        Possible value is 0,1,2 and 3. */
 
-    unsigned char roaming_enabled;                                 /**< @brief It represents whether the roaming is enabled or not.
-                                                                       It is of unsigned character datatype.
-                                                                       It should not exceed (2^8)-1. */
+    unsigned char roaming_enabled;                                 /**< It represents whether the roaming is enabled or not. */
 
-    unsigned int area_code;                                        /**< @brief It represents the area code.
-                                                                       It is of unsigned integer datatype.
-                                                                       It should not exceed (2^31)-1. */
+    unsigned int area_code;                                        /**< It represents the area code. */
 
-    unsigned long cell_id;                                         /**< @brief It represents the cell id.
-                                                                       It is of unsigned long integer datatype.
-                                                                       It should not exceed (2^31)-1. */
+    unsigned long cell_id;                                         /**< It represents the cell id. */
 } CellularCurrentPlmnInfoStruct;
 
 /**
@@ -583,19 +503,15 @@ typedef  struct
  */
 typedef  struct
 {
-    char network_name[32];                    /**< @brief It represents the name of the network.
-                                                  It is of character array datatype. */
+    char network_name[32];                    /**< It represents the name of the network. */
 
-    unsigned int MCC;                         /**< @brief It represents the mobile country code.
-                                                  It is of unsigned integer datatype.
-                                                  MCC is a 3 digit number ranges from 000 to 999. */
+    unsigned int MCC;                         /**< It represents the mobile country code.
+                                                   MCC is a 3 digit number ranges from 000 to 999. */
 
-    unsigned int MNC;                         /**< @brief It represents the mobile network code.
-                                                  It is of unsigned integer datatype.
-                                                  MNC is a 3 digit number ranges from 000 to 999. */
+    unsigned int MNC;                         /**< It represents the mobile network code.
+                                                   MNC is a 3 digit number ranges from 000 to 999. */
 
-    unsigned char network_allowed_flag;       /**< @brief It represents if the network is allowed or not.
-                                                  It is of unsigned character datatype. */
+    unsigned char network_allowed_flag;       /**< It represents if the network is allowed or not. */
 } CellularNetworkScanResultInfoStruct;
 
 /**

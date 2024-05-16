@@ -250,18 +250,23 @@ typedef  struct
     CellularPDPNetworkConfig_t PDPNetworkConfig;     /**< It represents the Packet Data Protocol network configuration type. */
     
     char ProfileName[64];                            /**< It represents the name of the profile.
+                                                          The string is zero-terminated and the terminator is included in the size.
                                                           It is a vendor specific value. */
                       
     char APN[64];                                    /**< It represents the Access Point Name of the gateway.
+                                                          The string is zero-terminated and the terminator is included in the size.
                                                           It is a vendor specific value. */
 
     char Username[256];                              /**< It represents the username.
+                                                          The string is zero-terminated and the terminator is included in the size.
                                                           It is a vendor specific value. */
                               
     char Password[256];                              /**< It represents the password.
+                                                          The string is zero-terminated and the terminator is included in the size.
                                                           It is a vendor specific value. */
 
     char Proxy[45];                                  /**< It stores the IP address of the proxy server that the device uses to connect to network.
+                                                          The string is zero-terminated and the terminator is included in the size.
                                                           It is a vendor specific value. */
 
     unsigned int ProxyPort;                          /**< It stores the port number that the device should use to connect to the proxy server.
@@ -312,22 +317,29 @@ typedef enum _CellularNetworkIPType_t
  */
 typedef  struct
 {
-    char WANIFName[16];                       /**< It represents the name of the WAN interface.Example: "wwan0" */
+    char WANIFName[16];                       /**< It represents the name of the WAN interface.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "wwan0" */
 
-    char IPAddress[128];                      /**< It represents IP address of the device.Example: "192.168.1.10" */
+    char IPAddress[128];                      /**< It represents IP address of the device. The address should always be in the dotted-decimal format.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "192.168.1.10" */
 
     CellularNetworkIPType_t IPType;           /**< It represents the type of IP address that the cellular network uses.
                                                    Possible value is 0,1,2 and 3. */
 
-    char SubnetMask[128];                     /**< It represents the subnet mask of the device.Example: "255.255.255.0" */
+    char SubnetMask[128];                     /**< It represents the subnet mask of the device.The address should always be in the dotted-decimal format.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "255.255.255.0" */
 
-    char DefaultGateWay[128];                 /**< It represents the IP address of the default gateway.Example: "192.168.1.1" */
+    char DefaultGateWay[128];                 /**< It represents the IP address of the default gateway. The address should always be in the dotted-decimal format.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "192.168.1.1" */
 
-    char DNSServer1[128];                     /**< It represents the IP address of the primary DNS server.Example: "8.8.8.8" */
+    char DNSServer1[128];                     /**< It represents the IP address of the primary DNS server. The address should always be in the dotted-decimal format.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "8.8.8.8" */
 
-    char DNSServer2[128];                     /**< It represents the IP address of the secondary DNS server.Example:  "1.1.1.1" */
+    char DNSServer2[128];                     /**< It represents the IP address of the secondary DNS server. The address should always be in the dotted-decimal format.
+                                                   The string is zero-terminated and the terminator is included in the size. Example:  "1.1.1.1" */
 
-    char Domains[256];                        /**< It represents the domain names that the device is associated with.Example: "hsd.pa.crnrstn.comcast.net" */
+    char Domains[256];                        /**< It represents the domain names that the device is associated with.
+                                                   The string is zero-terminated and the terminator is included in the size. Example: "hsd.pa.crnrstn.comcast.net" */
 
     unsigned int MTUSize;                     /**< It represents stores the maximum transmission unit size of the device.
                                                    The possible range of acceptable values is 1280 to 9000. */
@@ -418,13 +430,13 @@ typedef  struct
                                                       Possible value is 0,1,2 and 3. */
 
     char MnoName[32];                            /**< It represents the mobile newtwork operator name who provides the service.
-                                                      It is a vendor specific value. */
+                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
 
     char iccid[20];                              /**< It represents the Integrated Circuit Card id.
-                                                      It is a vendor specific value. */
+                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
 
     char msisdn[20];                             /**< It a number uniquely identifying a subscription in a Global System for Mobile communications.
-                                                      It is a vendor specific value. */
+                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
 } CellularUICCSlotInfoStruct;
 
 
@@ -436,19 +448,19 @@ typedef  struct
 typedef  struct
 {
     int RSSI;                     /**< It represents the strength of a signal.
-                                       The value ranges from -30 dBm to -90 dBm. */
+                                       The value ranges from -30 to -90 and is expressed in dBm. */
 
     int RSRQ;                     /**< It represents the quality of a received signal.
-                                       The value ranges from -3 dB to -19.5 dB. */
+                                       The value ranges from -3 to -19.5 and is expressed in dBm. */
 
     int RSRP;                     /**< It represents the average received power of a single RS resource element.
-                                       The value ranges from -140 dBm to -44 dBm. */
+                                       The value ranges from -140 to -44 and is expressed in dBm. */
 
     int SNR;                      /**< It represents the Signal-to-noise ratio.
-                                       The value ranges from -20 dB to 30 dB. */
+                                       The value ranges from -20 to 30 and is expressed in dBm. */
 
     int TXPower;                  /**< It represents the signal level leaving from that device within the transmitter power range.
-                                       The value ranges from 0 dBm to 30 dBm. */
+                                       The value ranges from 0 to 30 and is expressed in dBm. */
 } CellularSignalInfoStruct;
 
 /**
@@ -475,7 +487,8 @@ typedef struct
  */
 typedef  struct
 {
-    char plmn_name[32];                                            /**< It represents the plmn network information name. */
+    char plmn_name[32];                                            /**< It represents the plmn network information name.
+                                                                        The string is zero-terminated and the terminator is included in the size. */
 
     unsigned int MCC;                                              /**< It represents the mobile country code.
                                                                         MCC is a 3 digit number ranges from 000 to 999. */
@@ -503,7 +516,8 @@ typedef  struct
  */
 typedef  struct
 {
-    char network_name[32];                    /**< It represents the name of the network. */
+    char network_name[32];                    /**< It represents the name of the network.
+                                                   The string is zero-terminated and the terminator is included in the size. */
 
     unsigned int MCC;                         /**< It represents the mobile country code.
                                                    MCC is a 3 digit number ranges from 000 to 999. */

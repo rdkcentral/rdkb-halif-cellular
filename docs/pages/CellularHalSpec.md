@@ -100,9 +100,9 @@ Make sure Cellular HAL is not contributing more to memory and CPU utilization wh
 
 ## Quality Control
 
-Both HAL wrapper and 3rd party software implementations should prioritize robust memory management to guarantee leak-free and corruption-resistant operation.
+To ensure the highest quality and reliability, it is strongly recommended that third-party quality assurance tools like Coverity, Black Duck, and Valgrind be employed to thoroughly analyze the implementation. The goal is to detect and resolve potential issues such as memory leaks, memory corruption, or other defects before deployment.
 
-Passing checks by using any third-party tools like `Coverity`, `Black duck`, `Valgrind`, etc. without any issue to ensure quality. While optional, using these tools is considered a best practice.
+Furthermore, both the HAL wrapper and any third-party software interacting with it must prioritize robust memory management practices. This includes meticulous allocation, de-allocation, and error handling to guarantee a stable and leak-free operation.
 
 ## Licensing
 
@@ -110,11 +110,11 @@ Cellular HAL implementation is expected to released under the Apache License 2.0
 
 ## Build Requirements
 
-The source code should be able to be built under Linux Yocto environment and should be delivered as a binary named as `cellularmanager`
+The source code should be capable of, but not be limited to, building under the Yocto distribution environment. The recipe should deliver a shared library named as `cellularmanager.so`
   
 ## Variability Management
 
-Changes to the interface will be controlled by versioning, vendors will be expected to implement to a fixed version of the interface, and based on SLA agreements move to later versions as demand requires.
+The role of adjusting the interface, guided by versioning, rests solely within architecture requirements. Thereafter, vendors are obliged to align their implementation with a designated version of the interface. As per Service Level Agreement (SLA) terms, they may transition to newer versions based on demand needs.
 
 Each API interface will be versioned using [Semantic Versioning 2.0.0](https://semver.org/), the vendor code will comply with a specific version of the interface.
 
@@ -127,7 +127,7 @@ None
 All HAL function prototypes and datatype definitions are available in `cellular_hal.h` file.
 
   1. Components/Process must include `cellular_hal.h` to make use of Cellular Manager hal capabilities.
-  2. Components/Process should add linker dependency for `cellularmanager` binary.
+  2. Components/Process should add linker dependency to `cellularmanager.so`
 
 ## Theory of operation and key concepts
 

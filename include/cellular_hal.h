@@ -90,548 +90,338 @@
 #define CELLULAR_SLOT_ID_UNKNOWN                  (-1)          //!< Slot ID is not present 
 #define CELLULAR_PDP_CONTEXT_UNKNOWN              (-1)          //!< Packet data protocol context is not present
 #define CELLULAR_PACKET_DATA_INVALID_HANDLE       (0xFFFFFFFF)  //!< Invalid packet data handle
-/**
- * @brief Represents the status of cellular interface.
- *
- * It consists of seven members with each representing a different status for the interface.
- *
- */
+
+/**! Represents the operational status of a cellular interface. */
 typedef enum _CellularInterfaceStatus_t {
-    IF_UP = 1,           /**< The interface is up and running. */
-    IF_DOWN,             /**< The interface is down and not running. */
-    IF_UNKNOWN,          /**< The status of the interface is unknown. */
-    IF_DORMANT,          /**< The status of the interface is dormant. */
-    IF_NOTPRESENT,       /**< The status of the interface is not present. */
-    IF_LOWERLAYERDOWN,   /**< The lower layer of the interface is down. */  
-    IF_ERROR             /**< Error in the interface. */
-}CellularInterfaceStatus_t;
+    IF_UP = 1,         /**!< Interface is up and running. */
+    IF_DOWN,           /**!< Interface is down (not running). */
+    IF_UNKNOWN,        /**!< Interface status is unknown. */
+    IF_DORMANT,        /**!< Interface is in a dormant state. */
+    IF_NOTPRESENT,     /**!< Interface is not present in the system. */
+    IF_LOWERLAYERDOWN, /**!< The underlying network layer is down. */
+    IF_ERROR           /**!< General error condition in the interface. */
+} CellularInterfaceStatus_t;
 
-/**
- * @brief Represents the IP family for the cellular interface.
- *
- * It consists of four members with each representing a different preferred IP family.
- *
- */
+/**! Represents the preferred IP family for a cellular interface. */
 typedef enum _CellularIpFamilyPref_t {
-    IP_FAMILY_UNKNOWN = 1,   /**< The preferred IP family is unknown. */
-    IP_FAMILY_IPV4,          /**< The preferred IP family is IPV4. */
-    IP_FAMILY_IPV6,          /**< The preferred IP family is IPV6. */
-    IP_FAMILY_IPV4_IPV6      /**< The preferred IP family is either IPV4 or IPV6. */
-}CellularIpFamilyPref_t;
+    IP_FAMILY_UNKNOWN = 1, /**!< IP family is unknown. */
+    IP_FAMILY_IPV4,       /**!< IPv4 is preferred. */
+    IP_FAMILY_IPV6,       /**!< IPv6 is preferred. */
+    IP_FAMILY_IPV4_IPV6  /**!< Either IPv4 or IPv6 is acceptable. */
+} CellularIpFamilyPref_t;
 
-/**
- * @brief Represents the Access Technology for the cellular interface.
- *
- * It consists of eight members with each representing a different preferred access technology.
- *
+/**!
+ * @brief Represents the preferred access technology for a cellular interface.
  */
 typedef enum _CellularPrefAccessTechnology_t {
-    PREF_GPRS          = 1,                     /**< GSM with GPRS. */
-    PREF_EDGE,                                  /**< GSM with EDGE. */
-    PREF_UMTS,                                  /**< UMTS. */
-    PREF_UMTSHSPA,                              /**< 3GPP-HSPA. */
-    PREF_CDMA2000OneX,                          /**< CDMA2000OneX. */
-    PREF_CDMA2000HRPD,                          /**< CDMA2000HRPD. */
-    PREF_LTE,                                   /**< LTE. */
-    PREF_NR                                     /**< 5G New Radio. */
-}CellularPrefAccessTechnology_t;
+    PREF_GPRS = 1,         /**!< GSM with GPRS. */
+    PREF_EDGE,             /**!< GSM with EDGE. */
+    PREF_UMTS,             /**!< UMTS. */
+    PREF_UMTSHSPA,         /**!< 3GPP-HSPA. */
+    PREF_CDMA2000OneX,     /**!< CDMA2000 1x. */
+    PREF_CDMA2000HRPD,     /**!< CDMA2000 HRPD. */
+    PREF_LTE,             /**!< LTE. */
+    PREF_NR               /**!< 5G New Radio. */
+} CellularPrefAccessTechnology_t;
 
-/**
- * @brief Represents the Packet Data Protocol types for the cellular interface.
- *
- * It represents the type of IP address assigned to a Packet Data Protocol context in cellular communication protocols. 
- *
+/**!
+ * @brief Represents the Packet Data Protocol (PDP) type for a cellular interface.
+ * 
+ * This specifies the type of IP address assigned to the PDP context in cellular communication.
  */
-typedef enum _CellularPDPType_t
-{
-    CELLULAR_PDP_TYPE_IPV4         = 0,    /**< IP address assigned to the PDP context is an IPv4 address. */    
-    CELLULAR_PDP_TYPE_PPP,                 /**< IP address assigned to the PDP context is a PPP(Point-to-point Protocol) address. */
-    CELLULAR_PDP_TYPE_IPV6,                /**< IP address assigned to the PDP context is an IPv6 address. */
-    CELLULAR_PDP_TYPE_IPV4_OR_IPV6         /**< IP address assigned to the PDP context is either IPv4 or IPV6 address. */
-}CellularPDPType_t;
+typedef enum _CellularPDPType_t {
+    CELLULAR_PDP_TYPE_IPV4,       /**!< IPv4 address. */
+    CELLULAR_PDP_TYPE_PPP,        /**!< Point-to-Point Protocol (PPP) address. */
+    CELLULAR_PDP_TYPE_IPV6,       /**!< IPv6 address. */
+    CELLULAR_PDP_TYPE_IPV4_OR_IPV6 /**!< Either IPv4 or IPv6 address. */
+} CellularPDPType_t;
 
-/**
- * @brief Represents the Packet Data Protocol authentication types for the cellular interface.
- *
- * It consists of 3 members with each representing a different type of authentication. 
- *
- */
-typedef enum _CellularPDPAuthentication_t
-{
-    CELLULAR_PDP_AUTHENTICATION_NONE    = 0,    /**< No authentication is used for the PDP context. */
-    CELLULAR_PDP_AUTHENTICATION_PAP ,           /**< Password Authentication Protocol authentication is used for the PDP context. */
-    CELLULAR_PDP_AUTHENTICATION_CHAP,           /**< Challenge-Handshake Authentication Protocol is used for the PDP context. */
-}CellularPDPAuthentication_t;
-/**
- * @brief Represents the type of cellular profile for the cellular interface.
- *
- * It consists of two members with each representing a different type of cellular profile.
- *
- */
-typedef enum _CellularProfileType_t
-{
-    CELLULAR_PROFILE_TYPE_3GPP    = 0,    /**< Cellular profile is of type 3GPP. */
-    CELLULAR_PROFILE_TYPE_3GPP2           /**< Cellular profile is of type 3GPP2. */
+/**! Represents the Packet Data Protocol (PDP) authentication types for a cellular interface. */
+typedef enum _CellularPDPAuthentication_t {
+    CELLULAR_PDP_AUTHENTICATION_NONE = 0, /**!< No authentication. */
+    CELLULAR_PDP_AUTHENTICATION_PAP,      /**!< Password Authentication Protocol (PAP). */
+    CELLULAR_PDP_AUTHENTICATION_CHAP      /**!< Challenge-Handshake Authentication Protocol (CHAP). */
+} CellularPDPAuthentication_t;
+
+/**!<  Represents the type of cellular profile for a cellular interface. */
+typedef enum _CellularProfileType_t {
+    CELLULAR_PROFILE_TYPE_3GPP,  /**!< 3rd Generation Partnership Project (3GPP) profile. */
+    CELLULAR_PROFILE_TYPE_3GPP2  /**!< 3rd Generation Partnership Project 2 (3GPP2) profile. */
 } CellularProfileType_t;
 
-/**
- * @brief Represents the different types of network configuration for the cellular interface.
- *
- * It provides the network configuration for a Packet Data Protocol (PDP) context in cellular communication protocols.
- *
- */
-typedef enum _CellularPDPNetworkConfig_t
-{
-   CELLULAR_PDP_NETWORK_CONFIG_NAS = 1,    /**< Network is provided by the Network Attachment Subsystem. */
-   CELLULAR_PDP_NETWORK_CONFIG_DHCP        /**< Network is provided by the Dynamic Host Configuration Protocol. */
-}
-CellularPDPNetworkConfig_t;
+/**! Represents the network configuration type for a cellular interface's Packet Data Protocol (PDP) context. */
+typedef enum _CellularPDPNetworkConfig_t {
+    CELLULAR_PDP_NETWORK_CONFIG_NAS = 1, /**!< Network provided by the Network Attachment Subsystem (NAS). */
+    CELLULAR_PDP_NETWORK_CONFIG_DHCP   /**!< Network provided by the Dynamic Host Configuration Protocol (DHCP). */
+} CellularPDPNetworkConfig_t;
 
-/**
- * @brief Represents the modem operating configurations.
- *
- * It consists of two members with each representing a different type of cellular profile.
- *
- */
-typedef enum _CellularModemOperatingConfiguration_t
-{
-    CELLULAR_MODEM_SET_ONLINE     = 1,    /**< Set the modem to online mode. */
-    CELLULAR_MODEM_SET_OFFLINE,           /**< Set the modem to offline mode. */
-    CELLULAR_MODEM_SET_LOW_POWER_MODE,    /**< Set the modem to low power mode. */
-    CELLULAR_MODEM_SET_RESET,             /**< Reset the modem. */
-    CELLULAR_MODEM_SET_FACTORY_RESET      /**< Reset the modem to factory settings. */
-} CellularModemOperatingConfiguration_t;
+/**! Represents commands for controlling a cellular modem's operating configuration. */
+typedef enum _CellularModemOperatingConfiguration_t {
+    CELLULAR_MODEM_SET_ONLINE = 1,      /**!< Set the modem to online mode. */
+    CELLULAR_MODEM_SET_OFFLINE,        /**!< Set the modem to offline mode. */
+    CELLULAR_MODEM_SET_LOW_POWER_MODE, /**!< Set the modem to low power mode. */
+    CELLULAR_MODEM_SET_RESET,         /**!< Reset the modem. */
+    CELLULAR_MODEM_SET_FACTORY_RESET  /**!< Reset the modem to factory defaults. */
+} CellularModemOperatingConfiguration_t; 
 
-/**
- * @brief Represents the registered service types of cellular modem.
- *
- * It consists of four members with each representing a different registered service type.
- *
- */
+/**! Represents the registered service types of a cellular modem. */
 typedef enum _CellularModemRegisteredServiceType_t
 {
-   CELLULAR_MODEM_REGISTERED_SERVICE_NONE = 0,    /**< No service is registered with the modem. */
-   CELLULAR_MODEM_REGISTERED_SERVICE_PS,          /**< Packet-switched service is registered with the modem. */
-   CELLULAR_MODEM_REGISTERED_SERVICE_CS,          /**< Circuit-switched service is registered with the modem. */
-   CELLULAR_MODEM_REGISTERED_SERVICE_CS_PS        /**< Circuit-switched and Packet-switched service is registered with the modem. */
+    CELLULAR_MODEM_REGISTERED_SERVICE_NONE = 0, /**!< No service registered. */
+    CELLULAR_MODEM_REGISTERED_SERVICE_PS,      /**!< Packet-switched service registered. */
+    CELLULAR_MODEM_REGISTERED_SERVICE_CS,      /**!< Circuit-switched service registered. */
+    CELLULAR_MODEM_REGISTERED_SERVICE_CS_PS    /**!< Both circuit-switched and packet-switched services registered. */
 }
 CellularModemRegisteredServiceType_t;
 
-/**
- * @brief Represents the registration of the device in the cellular interface.
- *
- * It consists of two members with each representing the registration status of the device.
- *
- */
+/**!< Represents the registration status of a cellular device. */
 typedef enum _CellularRegistrationStatus_t
 {
-   DEVICE_REGISTERED = 1,        /**< Device is registered. */
-   DEVICE_NOT_REGISTERED,        /**< Device is not registered. */
-}CellularRegistrationStatus_t;
+    DEVICE_REGISTERED = 1, /**!< Device is registered on the network. */
+    DEVICE_NOT_REGISTERED  /**!< Device is not registered on the network. */
+} CellularRegistrationStatus_t;
 
-/**
- * @brief Represents the members of the cellular profile.
- *
- * It consists of all the members that are responsible for the profile of the cellular interface.
- *
- */
-typedef  struct
+/**! Represents a cellular profile configuration. */
+typedef struct
 {
-    int ProfileID;                                   /**< It represents the profile ID.*/   
-    
-    CellularProfileType_t ProfileType;               /**< It represents the profile type. */
-    
-    int PDPContextNumber;                            /**< It represents the Packet Data Protocol number. */
-    
-    CellularPDPType_t PDPType;                       /**< It represents the Packet Data Protocol type. */                      
-    
-    CellularPDPAuthentication_t PDPAuthentication;   /**< It represents the Packet Data Protocol authentication type. */
-    
-    CellularPDPNetworkConfig_t PDPNetworkConfig;     /**< It represents the Packet Data Protocol network configuration type. */
-    
-    char ProfileName[64];                            /**< It represents the name of the profile.
-                                                          The string is zero-terminated and the terminator is included in the size.
-                                                          It is a vendor specific value. */
-                      
-    char APN[64];                                    /**< It represents the Access Point Name of the gateway.
-                                                          The string is zero-terminated and the terminator is included in the size.
-                                                          It is a vendor specific value. */
+    int ProfileID;                 /**!< Unique identifier for the profile. */
+    CellularProfileType_t ProfileType;  /**!< Type of cellular profile (3GPP or 3GPP2). */
 
-    char Username[256];                              /**< It represents the username.
-                                                          The string is zero-terminated and the terminator is included in the size.
-                                                          It is a vendor specific value. */
-                              
-    char Password[256];                              /**< It represents the password.
-                                                          The string is zero-terminated and the terminator is included in the size.
-                                                          It is a vendor specific value. */
+    int PDPContextNumber;           /**!< Packet Data Protocol (PDP) context number. */
+    CellularPDPType_t PDPType;       /**!< PDP type (IPv4, IPv6, PPP, or IPv4/IPv6). */
+    CellularPDPAuthentication_t PDPAuthentication; /**!< PDP authentication type (none, PAP, or CHAP). */
+    CellularPDPNetworkConfig_t PDPNetworkConfig;  /**!< PDP network configuration type (NAS or DHCP). */
 
-    char Proxy[45];                                  /**< It stores the IP address of the proxy server that the device uses to connect to network.
-                                                          The string is zero-terminated and the terminator is included in the size.
-                                                          It is a vendor specific value. */
+    char ProfileName[64];          /**!< Vendor-specific profile name.
+                                          The string is zero-terminated and the terminator is included in the size. */
+    char APN[64];                   /**!< Access Point Name (APN) for the gateway (vendor-specific). 
+                                          The string is zero-terminated and the terminator is included in the size. */
+    char Username[256];             /**!< Username for authentication (vendor-specific).
+                                          The string is zero-terminated and the terminator is included in the size. */
+    char Password[256];             /**!< Password for authentication (vendor-specific).
+                                          The string is zero-terminated and the terminator is included in the size. */
+    char Proxy[45];                 /**!< IP address of the proxy server (vendor-specific).
+                                          The string is zero-terminated and the terminator is included in the size. */
+    unsigned int ProxyPort;        /**!< Port number for the proxy server (vendor-specific). */
 
-    unsigned int ProxyPort;                          /**< It stores the port number that the device should use to connect to the proxy server.
-                                                          It is a vendor specific value. */
-
-    unsigned char bIsNoRoaming;                      /**< It indicates whether the device is currently roaming on another network. */
-
-    unsigned char bIsAPNDisabled;                    /**< It indicates whether the device’s access point name is disabled. */
-
-    unsigned char bIsThisDefaultProfile;             /**< It indicates whether the current configuration is the default profile for the device. */
+    unsigned char bIsNoRoaming;     /**!< Indicates whether roaming is disabled (1 = true, 0 = false). */
+    unsigned char bIsAPNDisabled;    /**!< Indicates whether APN is disabled (1 = true, 0 = false). */
+    unsigned char bIsThisDefaultProfile; /**!< Indicates if this is the default profile (1 = true, 0 = false). */
 } CellularProfileStruct;
 
-/**
- * @brief Represents the members of the cellular context input.
- *
- * It consists of all the members that are responsible for the initialization of cellular interface.
- *
- */
-typedef  struct
+/**!<  Represents input parameters for initializing a cellular interface. */
+typedef struct
 {
-    CellularIpFamilyPref_t enIPFamilyPreference;                 /**< It represents IP family for the cellular interface.
-                                                                      Possible value is 1,2,3 and 4. */
-
-    CellularProfileStruct stIfInput;                             /**< It represents the various interface inputs.
-                                                                      Possible values include APN, username, password etc. */
-                 
-    CellularPrefAccessTechnology_t enPreferenceTechnology;       /**< It represents the Access Technology for the cellular interface.
-                                                                      Possible value is 1,2,3,4,5,6,7,and 8. */
+    CellularIpFamilyPref_t enIPFamilyPreference; /**!< Preferred IP family (IPv4, IPv6, or both). */
+    CellularProfileStruct stIfInput;             /**!< Interface-specific configuration details. */
+    CellularPrefAccessTechnology_t enPreferenceTechnology; /**!< Preferred access technology (e.g., LTE, 5G). */
 } CellularContextInitInputStruct;
 
-/**
- * @brief Represents the type of IP address that a cellular network uses.
- *
- * It consists of four members in the context of cellular networks to specify the type of IP address that is used by the network.
- */
+/**!< Represents the IP address type used by a cellular network. */
 typedef enum _CellularNetworkIPType_t
 {
-    CELLULAR_NETWORK_IP_FAMILY_UNKNOWN     = 0,    /**< The preferred IP family is unknown. */
-    CELLULAR_NETWORK_IP_FAMILY_IPV4,               /**< The preferred IP family is IPV4. */
-    CELLULAR_NETWORK_IP_FAMILY_IPV6,               /**< The preferred IP family is IPV6. */
-    CELLULAR_NETWORK_IP_FAMILY_UNSPECIFIED         /**< The preferred IP family is not specified. */
+    CELLULAR_NETWORK_IP_FAMILY_UNKNOWN = 0,   /**!< IP address type is unknown. */
+    CELLULAR_NETWORK_IP_FAMILY_IPV4,         /**!< IPv4 address. */
+    CELLULAR_NETWORK_IP_FAMILY_IPV6,         /**!< IPv6 address. */
+    CELLULAR_NETWORK_IP_FAMILY_UNSPECIFIED   /**!< IP address type is not specified. */
 } CellularNetworkIPType_t;
 
-/**
- * @brief Represents the cellular network connections.
- *
- * It consists of members used to store information about a cellular network connection.
- */
+/**! Represents a cellular network connection's details. */
 typedef  struct
 {
-    char WANIFName[16];                       /**< It represents the name of the WAN interface.
+    char WANIFName[16];                       /**!< It represents the name of the WAN interface.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "wwan0" */
 
-    char IPAddress[128];                      /**< It represents IP address of the device. The address should always be in the dotted-decimal format.
+    char IPAddress[128];                      /**!< It represents IP address of the device. The address should always be in the dotted-decimal format.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "192.168.1.10" */
 
-    CellularNetworkIPType_t IPType;           /**< It represents the type of IP address that the cellular network uses.
+    CellularNetworkIPType_t IPType;           /**!< It represents the type of IP address that the cellular network uses.
                                                    Possible value is 0,1,2 and 3. */
 
-    char SubnetMask[128];                     /**< It represents the subnet mask of the device.The address should always be in the dotted-decimal format.
+    char SubnetMask[128];                     /**!< It represents the subnet mask of the device.The address should always be in the dotted-decimal format.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "255.255.255.0" */
 
-    char DefaultGateWay[128];                 /**< It represents the IP address of the default gateway. The address should always be in the dotted-decimal format.
+    char DefaultGateWay[128];                 /**!< It represents the IP address of the default gateway. The address should always be in the dotted-decimal format.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "192.168.1.1" */
 
-    char DNSServer1[128];                     /**< It represents the IP address of the primary DNS server. The address should always be in the dotted-decimal format.
+    char DNSServer1[128];                     /**!< It represents the IP address of the primary DNS server. The address should always be in the dotted-decimal format.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "8.8.8.8" */
 
-    char DNSServer2[128];                     /**< It represents the IP address of the secondary DNS server. The address should always be in the dotted-decimal format.
+    char DNSServer2[128];                     /**!< It represents the IP address of the secondary DNS server. The address should always be in the dotted-decimal format.
                                                    The string is zero-terminated and the terminator is included in the size. Example:  "1.1.1.1" */
 
-    char Domains[256];                        /**< It represents the domain names that the device is associated with.
+    char Domains[256];                        /**!< It represents the domain names that the device is associated with.
                                                    The string is zero-terminated and the terminator is included in the size. Example: "hsd.pa.crnrstn.comcast.net" */
 
-    unsigned int MTUSize;                     /**< It represents stores the maximum transmission unit size of the device.
+    unsigned int MTUSize;                     /**!< It represents stores the maximum transmission unit size of the device.
                                                    The possible range of acceptable values is 1280 to 9000. */
 } CellularIPStruct;
 
-/**
- * @brief Represents the data transfer statistics of a cellular network connection.
- *
- * It consists of members used to store information about the number of packets and bytes sent and received over a cellular network connection.
- */
-typedef  struct
+/**!< Represents data transfer statistics for a cellular network connection. */
+typedef struct
 {
-    unsigned long BytesSent;                      /**< It represents the total number of bytes sent over the cellular network connection. */
-
-    unsigned long BytesReceived;                  /**< It represents the total number of bytes received over the cellular network connection. */
-
-    unsigned long PacketsSent;                    /**< It represents the total number of packets sent over the cellular network connection. */
-
-    unsigned long PacketsReceived;                /**< It represents the total number of packets received over the cellular network connection. */
-
-    unsigned long PacketsSentDrop;                /**< It represents  the total number of packets that were dropped while being sent over the cellular network connection. */
-
-    unsigned long PacketsReceivedDrop;            /**< It represents that stores the total number of packets that were dropped while being received over the cellular network connection. */
-
-    unsigned long UpStreamMaxBitRate;             /**< It represents the maximum bit rate for upstream data transfer over the cellular network connection. */
-
-    unsigned long DownStreamMaxBitRate;           /**< It represents the maximum bit rate for downstream data transfer over the cellular network connection. */
+    unsigned long BytesSent;          /**!< Total bytes sent over the cellular connection. */
+    unsigned long BytesReceived;       /**!< Total bytes received over the cellular connection. */
+    unsigned long PacketsSent;        /**!< Total packets sent over the cellular connection. */
+    unsigned long PacketsReceived;     /**!< Total packets received over the cellular connection. */
+    unsigned long PacketsSentDrop;    /**!< Total packets dropped during transmission. */
+    unsigned long PacketsReceivedDrop; /**!< Total packets dropped during reception. */
+    unsigned long UpStreamMaxBitRate;  /**!< Maximum upstream bit rate (bits/second). */
+    unsigned long DownStreamMaxBitRate; /**!< Maximum downstream bit rate (bits/second). */
 } CellularPacketStatsStruct;
 
-/**
- * @brief Represents the form factors of the UICC.
- *
- * It consists of four members used to represent the form factor of a Universal Integrated Circuit Card used in cellular devices. 
- */
-typedef enum _CellularUICCFormFactor_t
-{
-    CELLULAR_UICC_FORM_FACTOR_1FF     = 0,        /**< First form factor of the UICC also known as the full-size SIM card. */
-    CELLULAR_UICC_FORM_FACTOR_2FF,                /**< Second form factor of the UICC also known as the mini SIM card. */
-    CELLULAR_UICC_FORM_FACTOR_3FF,                /**< Third form factor of the UICC also known as the micro SIM card. */
-    CELLULAR_UICC_FORM_FACTOR_4FF                 /**< First form factor of the UICC also known as the nano SIM card. */
-} CellularUICCFormFactor_t;
 
-/**
- * @brief Represents the current SIM status.
- *
- * It consists of four members used to represent the status of a Universal Integrated Circuit Card used in cellular devices.
- */
+/**!< Represents the form factors of a Universal Integrated Circuit Card (UICC). */
+typedef enum _CellularUICCFormFactor_t {
+    CELLULAR_UICC_FORM_FACTOR_1FF = 0, /**!< Full-size SIM card. */
+    CELLULAR_UICC_FORM_FACTOR_2FF,    /**!< Mini SIM card. */
+    CELLULAR_UICC_FORM_FACTOR_3FF,    /**!< Micro SIM card. */
+    CELLULAR_UICC_FORM_FACTOR_4FF     /**!< Nano SIM card. */
+} CellularUICCFormFactor_t; 
+
+/**! Represents the status of a Universal Integrated Circuit Card (UICC). */
 typedef enum _CellularUICCStatus_t
 {
-    CELLULAR_UICC_STATUS_VALID     = 0,        /**<  UICC is valid and can be used for cellular communication. */
-    CELLULAR_UICC_STATUS_BLOCKED,              /**<  UICC is blocked and cannot be used for cellular communication. */
-    CELLULAR_UICC_STATUS_ERROR,                /**<  UICC is error state and cannot be used for cellular communication. */
-    CELLULAR_UICC_STATUS_EMPTY                 /**<  UICC is empty and has no data. */
+    CELLULAR_UICC_STATUS_VALID = 0,   /**!< UICC is valid. */
+    CELLULAR_UICC_STATUS_BLOCKED,     /**!< UICC is blocked. */
+    CELLULAR_UICC_STATUS_ERROR,       /**!< UICC is in an error state. */
+    CELLULAR_UICC_STATUS_EMPTY        /**!< UICC has no data. */
 } CellularUICCStatus_t;
 
-/**
- * @brief Represents the type of application UICC uses.
- *
- * It consists of three members used to represent type of Universal Integrated Circuit Card application used in cellular devices.
- */
-typedef enum _CellularUICCApplication_t
-{
-    CELLULAR_UICC_APPLICATION_USIM     = 0,        /**< Universal Subscriber Identity Module application used in 3G and 4G cellular networks. */
-    CELLULAR_UICC_APPLICATION_ISIM,                /**< IP Multimedia Services Identity Module application used in IMS networks. */
-    CELLULAR_UICC_APPLICATION_ESIM                 /**< Embedded SIM application used in devices that support remote SIM provisioning. */
+/**! Represents the type of application on a Universal Integrated Circuit Card (UICC). */
+typedef enum _CellularUICCApplication_t {
+    CELLULAR_UICC_APPLICATION_USIM = 0, /**!< Universal Subscriber Identity Module (USIM) for 3G/4G networks. */
+    CELLULAR_UICC_APPLICATION_ISIM,    /**!< IP Multimedia Services Identity Module (ISIM) for IMS networks. */
+    CELLULAR_UICC_APPLICATION_ESIM    /**!< Embedded SIM (eSIM) application. */
 } CellularUICCApplication_t;
 
-/**
- * @brief Represents the UICC slot informations.
- *
- * It consists of structure members used to represent Universal Integrated Circuit Card slot informations.
- */
-typedef  struct
+/**!<  Represents information about a Universal Integrated Circuit Card (UICC) slot. */
+typedef struct
 {
-    unsigned char SlotEnable;                    /**< It represents the slot status. */
-
-    unsigned char IsCardPresent;                 /**< It represents the card status. */
-
-    unsigned char CardEnable;                    /**< It represents the slot status. */
-
-    CellularUICCFormFactor_t FormFactor;         /**< It represents the form factor of a Universal Integrated Circuit Card used in cellular devices.
-                                                      Possible value is 0,1,2 and 3. */
-
-    CellularUICCApplication_t Application;       /**< It represents type of Universal Integrated Circuit Card application used in cellular devices.
-                                                      Possible value is 0,1 and 2. */
-
-    CellularUICCStatus_t Status;                 /**< It represents the status of a Universal Integrated Circuit Card used in cellular devices.
-                                                      Possible value is 0,1,2 and 3. */
-
-    char MnoName[32];                            /**< It represents the mobile newtwork operator name who provides the service.
-                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
-
-    char iccid[20];                              /**< It represents the Integrated Circuit Card id.
-                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
-
-    char msisdn[20];                             /**< It a number uniquely identifying a subscription in a Global System for Mobile communications.
-                                                      The string is zero-terminated and the terminator is included in the size. It is a vendor specific value. */
+    unsigned char SlotEnable;        /**!< Whether the slot is enabled (1) or disabled (0). */
+    unsigned char IsCardPresent;     /**!< Whether a card is present in the slot (1) or not (0). */
+    unsigned char CardEnable;        /**!< Whether the card in the slot is enabled (1) or disabled (0). */
+    CellularUICCFormFactor_t FormFactor; /**!< UICC form factor (e.g., 1FF, 2FF, 3FF, 4FF). */
+    CellularUICCApplication_t Application; /**!< Type of UICC application (USIM, ISIM, eSIM). */
+    CellularUICCStatus_t Status;        /**!< Current status of the UICC (valid, blocked, error, empty). */
+    char MnoName[32];                 /**!< Mobile Network Operator (MNO) name. */
+    char iccid[20];                   /**!< Integrated Circuit Card Identifier (ICCID). */
+    char msisdn[20];                  /**!< Mobile Subscriber Integrated Services Digital Network Number (MSISDN). */
 } CellularUICCSlotInfoStruct;
 
-
-/**
- * @brief Represents the UICC slot informations.
- *
- * It consists of structure members used to represent Universal Integrated Circuit Card slot informations.
- */
+/**! Represents cellular signal strength information for a UICC slot. */
 typedef  struct
 {
-    int RSSI;                     /**< It represents the strength of a signal.
+    int RSSI;                     /**!< It represents the strength of a signal.
                                        The value ranges from -30 to -90 and is expressed in dBm. */
 
-    int RSRQ;                     /**< It represents the quality of a received signal.
+    int RSRQ;                     /**!< It represents the quality of a received signal.
                                        The value ranges from -3 to -19.5 and is expressed in dBm. */
 
-    int RSRP;                     /**< It represents the average received power of a single RS resource element.
+    int RSRP;                     /**!< It represents the average received power of a single RS resource element.
                                        The value ranges from -140 to -44 and is expressed in dBm. */
 
-    int SNR;                      /**< It represents the Signal-to-noise ratio.
+    int SNR;                      /**!< It represents the Signal-to-noise ratio.
                                        The value ranges from -20 to 30 and is expressed in dBm. */
 
-    int TXPower;                  /**< It represents the signal level leaving from that device within the transmitter power range.
+    int TXPower;                  /**!< It represents the signal level leaving from that device within the transmitter power range.
                                        The value ranges from 0 to 30 and is expressed in dBm. */
 } CellularSignalInfoStruct;
 
-/**
- * @brief Represents the cellular location informations.
- *
- * It consists of structure members used to represent location informations.
- */
+/**!< Represents location information based on a cellular cell. */
 typedef struct
 {
-    unsigned int globalCellId;          /**< It represents the unique identifier of the cell in the network.
-                                            The value ranges from 0 to 68719476735. */
-
-    unsigned int bandInfo;              /**< It represents the frequency band used by the cell.
-                                            The value ranges from 0 to 32767. */
-
-    unsigned int servingCellId;         /**< It represents the unique identifier of the serving cell.
-                                            The value ranges from 0 to 68719476735. */
+    unsigned int globalCellId;  /**!< Unique identifier of the cell (0 - (0xFFFFFFFFF)). */
+    unsigned int bandInfo;      /**!< Frequency band used by the cell (0 - 0x7FFF). */
+    unsigned int servingCellId; /**!< Unique identifier of the serving cell (0 - (0xFFFFFFFFF)). */
 } CellLocationInfoStruct;
 
-/**
- * @brief Represents the UICC slot informations.
- *
- * It consists of structure members used to represent Universal Integrated Circuit Card slot informations.
- */
-typedef  struct
+/**! Represents current Public Land Mobile Network (PLMN) information for a UICC slot. */
+typedef struct
 {
-    char plmn_name[32];                                            /**< It represents the plmn network information name.
-                                                                        The string is zero-terminated and the terminator is included in the size. */
-
-    unsigned int MCC;                                              /**< It represents the mobile country code.
-                                                                        MCC is a 3 digit number ranges from 000 to 999. */
-
-    unsigned int MNC;                                              /**< It represents the mobile network code.
-                                                                        MNC is a 3 digit number ranges from 000 to 999. */
-
-    CellularRegistrationStatus_t registration_status;              /**< It represents the registration status.
-                                                                        Possible value is 1 and 2. */
-
-    CellularModemRegisteredServiceType_t registered_service;       /**< It represents registered service types of cellular modem.
-                                                                        Possible value is 0,1,2 and 3. */
-
-    unsigned char roaming_enabled;                                 /**< It represents whether the roaming is enabled or not. */
-
-    unsigned int area_code;                                        /**< It represents the area code. */
-
-    unsigned long cell_id;                                         /**< It represents the cell id. */
+    char plmn_name[32];                 /**!< PLMN network name. */
+    unsigned int MCC;                  /**!< Mobile Country Code (000 - 999). */
+    unsigned int MNC;                  /**!< Mobile Network Code (000 - 999). */
+    CellularRegistrationStatus_t registration_status; /**!< Device registration status (Registered or Not Registered). */
+    CellularModemRegisteredServiceType_t registered_service; /**!< Registered service type (None, PS, CS, or CS & PS). */
+    unsigned char roaming_enabled;          /**!< Roaming status (1: enabled, 0: disabled). */
+    unsigned int area_code;              /**!< Area code. */
+    unsigned long cell_id;                /**!< Cell ID. */
 } CellularCurrentPlmnInfoStruct;
 
-/**
- * @brief Represents the scan results information of the network.
- *
- * It consists of structure members used to represent the network scan results information.
- */
-typedef  struct
+/**!< Represents network scan result information. */
+typedef struct
 {
-    char network_name[32];                    /**< It represents the name of the network.
-                                                   The string is zero-terminated and the terminator is included in the size. */
-
-    unsigned int MCC;                         /**< It represents the mobile country code.
-                                                   MCC is a 3 digit number ranges from 000 to 999. */
-
-    unsigned int MNC;                         /**< It represents the mobile network code.
-                                                   MNC is a 3 digit number ranges from 000 to 999. */
-
-    unsigned char network_allowed_flag;       /**< It represents if the network is allowed or not. */
+    char network_name[32];  /**!< Name of the network. */
+    unsigned int MCC;       /**!< Mobile Country Code (000 - 999). */
+    unsigned int MNC;       /**!< Mobile Network Code (000 - 999). */
+    unsigned char network_allowed_flag; /**!< Indicates if the network is allowed (1 = true, 0 = false). */
 } CellularNetworkScanResultInfoStruct;
 
-/**
- * @brief Represents the detection status of the cellular device.
- *
- * It consists of two members used to represent whether the cellular device is detected or not.
- */
-typedef enum _CellularDeviceDetectionStatus_t
-{
-   DEVICE_DETECTED = 1,        /**< Cellular device detected. */
-   DEVICE_REMOVED,             /**< Cellular device removed. */
-}CellularDeviceDetectionStatus_t;
+/**! Indicates the detection status of a cellular device. */
+typedef enum _CellularDeviceDetectionStatus_t {
+    DEVICE_DETECTED = 1, /**!< Device is detected. */
+    DEVICE_REMOVED     /**!< Device is removed. */
+} CellularDeviceDetectionStatus_t;
 
-/**
- * @brief Represents the open status of the cellular device.
- *
- * It consists of three members used to represent the open status of the cellular device.
- */
-typedef enum _CellularDeviceOpenStatus_t
-{
-   DEVICE_OPEN_STATUS_NOT_READY = 1,        /**< Cellular device open status not ready. */
-   DEVICE_OPEN_STATUS_INPROGRESS,           /**< Cellular device open status in progress. */
-   DEVICE_OPEN_STATUS_READY,                /**< Cellular device open status ready. */
-}CellularDeviceOpenStatus_t;
+/**! Represents the open status of a cellular device. */
+typedef enum _CellularDeviceOpenStatus_t {
+    DEVICE_OPEN_STATUS_NOT_READY = 1, /**!< Not ready to open. */
+    DEVICE_OPEN_STATUS_INPROGRESS,   /**!< Opening in progress. */
+    DEVICE_OPEN_STATUS_READY,        /**!< Ready to open. */
+} CellularDeviceOpenStatus_t;
 
-/**
- * @brief Represents the slot status of the cellular device.
- *
- * It consists of three members used to represent the slot status of the cellular device.
- */
+/**! Represents the slot status of a cellular device. */
 typedef enum _CellularDeviceSlotStatus_t
 {
-   DEVICE_SLOT_STATUS_NOT_READY = 1,        /**< Cellular device slot status not ready. */
-   DEVICE_SLOT_STATUS_SELECTING,            /**< Cellular device slot status selecting. */
-   DEVICE_SLOT_STATUS_READY,                /**< Cellular device slot status ready. */
+    DEVICE_SLOT_STATUS_NOT_READY = 1, /**!< Slot is not ready. */
+    DEVICE_SLOT_STATUS_SELECTING,   /**!< Slot is being selected. */
+    DEVICE_SLOT_STATUS_READY,        /**!< Slot is ready for use. */
 } CellularDeviceSlotStatus_t;
 
-/**
- * @brief Represents the NAS status of the cellular device.
- *
- * It consists of three members used to represent the NAS status of the cellular device.
- */
+/**! Represents the Network Attachment Subsystem (NAS) status of a cellular device. */
 typedef enum _CellularDeviceNASStatus_t
 {
-   DEVICE_NAS_STATUS_NOT_REGISTERED = 1,        /**< Cellular device NAS status not registered. */
-   DEVICE_NAS_STATUS_REGISTERING,               /**< Cellular device NAS status not registering. */
-   DEVICE_NAS_STATUS_REGISTERED,                /**< Cellular device NAS status registered. */
+    DEVICE_NAS_STATUS_NOT_REGISTERED = 1, /**!< Not registered. */
+    DEVICE_NAS_STATUS_REGISTERING,        /**!< Registering. */
+    DEVICE_NAS_STATUS_REGISTERED        /**!< Registered. */
 } CellularDeviceNASStatus_t;
 
-/**
- * @brief Represents the NAS roaming status of the cellular device.
- *
- * It consists of two members used to represent the NAS roaming status of the cellular device.
- */
-typedef enum _CellularDeviceNASRoamingStatus_t
-{
-   DEVICE_NAS_STATUS_ROAMING_OFF = 1,        /**< Cellular device NAS roaming off. */
-   DEVICE_NAS_STATUS_ROAMING_ON,             /**< Cellular device NAS roaming on. */
+/**! Represents the Network Attachment Subsystem (NAS) roaming status of a cellular device. */
+typedef enum _CellularDeviceNASRoamingStatus_t {
+    DEVICE_NAS_STATUS_ROAMING_OFF = 1, /**!< NAS roaming is off. */
+    DEVICE_NAS_STATUS_ROAMING_ON,      /**!< NAS roaming is on. */
 } CellularDeviceNASRoamingStatus_t;
 
-/**
- * @brief Represents the context profile status of the cellular device.
- *
- * It consists of two members used to represent the context profile status of the cellular device.
- */
-typedef enum _CellularContextProfileStatus_t
-{
-   PROFILE_STATUS_INACTIVE = 1,        /**< Cellular device context profile status inactive. */
-   PROFILE_STATUS_ACTIVE,              /**< Cellular device context profile status active. */
+/**! Represents the status of a cellular context profile. */
+typedef enum _CellularContextProfileStatus_t {
+    PROFILE_STATUS_INACTIVE = 1, /**!< Profile is inactive. */
+    PROFILE_STATUS_ACTIVE       /**!< Profile is active. */
 } CellularContextProfileStatus_t;
 
-/**
- * @brief Represents the profile status of the cellular device.
- *
- * It consists of four members used to represent the profile status of the cellular device.
- */
-/** Cellular Device Profile Selection Status */
-typedef enum _CellularDeviceProfileSelectionStatus_t
-{
-   DEVICE_PROFILE_STATUS_NOT_READY = 1,        /**< Cellular device profile status not ready. */
-   DEVICE_PROFILE_STATUS_CONFIGURING,          /**< Cellular device profile status configuring. */
-   DEVICE_PROFILE_STATUS_READY,                /**< Cellular device profile status ready. */
-   DEVICE_PROFILE_STATUS_DELETED               /**< Cellular device profile status deleted. */
+/**! Represents the profile selection status of a cellular device. */
+typedef enum _CellularDeviceProfileSelectionStatus_t {
+    DEVICE_PROFILE_STATUS_NOT_READY = 1, /**!< Profile selection not ready. */
+    DEVICE_PROFILE_STATUS_CONFIGURING,  /**!< Profile selection is being configured. */
+    DEVICE_PROFILE_STATUS_READY,       /**!< Profile selection is ready. */
+    DEVICE_PROFILE_STATUS_DELETED     /**!< Profile has been deleted. */
 } CellularDeviceProfileSelectionStatus_t;
 
-/**
- * @brief Represents the IP ready status of the cellular device.
- *
- * It consists of two members used to represent the IP status of the cellular device.
+/**!
+ * @brief Represents the IP readiness status of a cellular device. 
  */
-typedef enum _CellularDeviceIPReadyStatus_t
-{
-   DEVICE_NETWORK_IP_NOT_READY = 1,        /**< Cellular device IP not ready. */
-   DEVICE_NETWORK_IP_READY,                /**< Cellular device IP ready. */
-} CellularDeviceIPReadyStatus_t;
+typedef enum _CellularDeviceIPReadyStatus_t {
+    DEVICE_NETWORK_IP_NOT_READY = 1, /**!< IP configuration is not ready. */
+    DEVICE_NETWORK_IP_READY        /**!< IP configuration is ready. */
+} CellularDeviceIPReadyStatus_t; 
 
-/**
- * @brief Represents the network packet status of the cellular device.
- *
- * It consists of two members used to represent the network packet status of the cellular device.
- */
+/**! Represents the network packet connection status of a cellular device. */
 typedef enum _CellularNetworkPacketStatus_t
 {
-   DEVICE_NETWORK_STATUS_DISCONNECTED = 1,        /**< Cellular device network status disconnected. */
-   DEVICE_NETWORK_STATUS_CONNECTED,               /**< Cellular device network status connected. */
+    DEVICE_NETWORK_STATUS_DISCONNECTED = 1, /**!< Network is disconnected. */
+    DEVICE_NETWORK_STATUS_CONNECTED      /**!< Network is connected. */
 } CellularNetworkPacketStatus_t;
+
 /** @} */  //END OF GROUP CELLULAR_HAL_TYPES
 /**
  * @addtogroup CELLULAR_HAL_APIS

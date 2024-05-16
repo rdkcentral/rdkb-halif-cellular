@@ -132,16 +132,3 @@ All HAL function prototypes and datatype definitions are available in `cellular_
 ## Theory of operation and key concepts
 
 Covered as per "Description" sections in the API documentation.
-
-## Sequence Diagram
-
-```mermaid
-sequenceDiagram
-participant Caller
-participant Cellular HAL
-participant Vendor
-Caller->>Cellular HAL: cellular_hal_XXXX()
-Cellular HAL->>Vendor: 
-Vendor ->>Cellular HAL: 
-Cellular HAL->>Caller: cellular_hal_XXXX() return
-```

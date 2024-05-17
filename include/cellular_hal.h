@@ -91,6 +91,19 @@
 #define CELLULAR_PDP_CONTEXT_UNKNOWN              (-1)          //!< Packet data protocol context is not present
 #define CELLULAR_PACKET_DATA_INVALID_HANDLE       (0xFFFFFFFF)  //!< Invalid packet data handle
 
+/*
+* TODO (Enhance Error Reporting):
+*   - Replace the generic `RETURN_ERR` with a more descriptive error code enumeration.
+*   - Define specific error codes to pinpoint various failure scenarios, including:
+*       - Invalid input parameters (e.g., null pointers, out-of-range values)
+*       - Resource allocation failures (e.g., out-of-memory)
+*       - Communication or timeout issues with external systems (e.g., backend services)
+*       - File system errors (e.g., file not found, permission denied)
+*       - Internal errors within the HAL
+*       - Specific DOCSIS-related errors (refer to DOCSIS specifications)
+*   - Document the new error codes thoroughly in the header file and any relevant guides.
+*/
+
 /**! Represents the operational status of a cellular interface. */
 typedef enum _CellularInterfaceStatus_t {
     IF_UP = 1,         /**!< Interface is up and running. */

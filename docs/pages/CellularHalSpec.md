@@ -131,4 +131,26 @@ All HAL function prototypes and datatype definitions are available in `cellular_
 
 ## Theory of operation and key concepts
 
-Covered as per "Description" sections in the API documentation.
+### Object Lifecycles
+
+| Aspect | Description |
+|---|---|
+| **Creation** | The `cellular_hal_init()` function initializes the Cellular HAL, configuring necessary resources and setting up any initial states required for operation. This function expects a `CellularContextInitInputStruct` containing initial configuration details. |
+| **Usage** | The initialized instance is then used for further cellular operations, such as managing network connections, querying device status, and handling cellular events. |
+| **Destruction** | Resources are managed internally; however, there's no explicit function for deinitialization provided in the header for clean-up. Hence, applications must handle clean-up internally as necessary when the cellular functionality is no longer required or before the application is terminated. |
+| **Unique Identifiers** | The system does not explicitly define a unique identifier for HAL instances in the interface; operations appear to be globally applicable to the system's cellular capabilities. |
+
+### Method Sequencing
+
+| Aspect | Description |
+|---|---|
+| **Initialization** | `cellular_hal_init()` must be invoked before any other operations. This setup is crucial as it prepares the cellular module for subsequent commands and configurations. |
+| **Logical Order** | Post-initialization, methods such as `cellular_hal_open_device()` and `cellular_hal_start_network()` should be called to establish network connectivity. Configuration changes typically precede action commands, such as setting parameters before starting a session or applying changes. |
+
+### State-Dependent Behavior
+
+| Aspect | Description |
+|---|---|
+| **Implicit State Model** | The HAL maintains internal states that are not explicitly detailed in the API but are implied by the functions available. For example, the modem must be initialized and in a ready state before certain actions can be performed. |
+| **State-Dependent Methods** | Many operations implicitly require the modem to be in specific states. For example, network operations like `cellular_hal_start_network()` can only be executed successfully if the device is correctly initialized and not currently in an error state. |
+| **Error Handling** | The API functions return either `RETURN_OK` or `RETURN_ERR`, indicating success or failure. Detailed error handling is essential, and methods should include robust checks to ensure that operations are performed in valid states. |

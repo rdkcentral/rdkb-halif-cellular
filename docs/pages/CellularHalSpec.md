@@ -138,7 +138,7 @@ All HAL function prototypes and datatype definitions are available in `cellular_
 | **Creation** | The `cellular_hal_init()` function initializes the Cellular HAL, configuring necessary resources and setting up any initial states required for operation. This function expects a `CellularContextInitInputStruct` containing initial configuration details. |
 | **Usage** | The initialized instance is then used for further cellular operations, such as managing network connections, querying device status, and handling cellular events. |
 | **Destruction** | Resources are managed internally; however, there's no explicit function for deinitialization provided in the header for clean-up. Hence, applications must handle clean-up internally as necessary when the cellular functionality is no longer required or before the application is terminated. |
-| **Unique Identifiers** | The system does not explicitly define a unique identifier for HAL instances in the interface; operations appear to be globally applicable to the system's cellular capabilities. |
+| **Unique Identifiers** | The system does not explicitly define a unique identifier for HAL instances in the interface; operations are globally applicable to the system's cellular capabilities. |
 
 ### Method Sequencing
 

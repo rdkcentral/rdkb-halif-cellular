@@ -45,13 +45,7 @@
 #include <pthread.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <glib.h>
-#include <glib/gprintf.h>
-#include <gio/gio.h>
-#include <glib-unix.h>
-#ifndef CELLULAR_MGR_LITE
-#include <libqmi-glib.h>
-#endif
+
 /**********************************************************************
                 STRUCTURE AND CONSTANT DEFINITIONS
 **********************************************************************/
@@ -466,7 +460,7 @@ unsigned int cellular_hal_IsModemDevicePresent(void);
 /**
 * @brief - Initialise the Cellular HAL
 *
-* @param[in] pstCtxInputStruct variable is the Input structure to pass to cellular hal initialization function described by the CellularContextInitInputStruct.
+* @param[out] pstCtxInputStruct variable is a pointer, needs to parse CellularContextInitInputStruct structure to initialization cellular hal.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -787,7 +781,7 @@ typedef  struct
 *
 * @param[in] ip_request_type variable is from the enumerated datatype CellularNetworkIPType_t which receives IP configuration for stopped network from driver.
 * @param[in] pstProfileInput - Here needs to pass profile from structure CellularProfileStruct to start network. If NULL then it should take it default profile otherwise start based on input.
-* @param[in] pstCBStruct - Here needs to fill CB function pointer for packet and ip status from the structure CellularNetworkCBStruct.
+* @param[out] pstCBStruct - Here needs to fill CB function pointer for packet and ip status from the structure CellularNetworkCBStruct.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful

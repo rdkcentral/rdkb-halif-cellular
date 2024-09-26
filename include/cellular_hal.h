@@ -460,7 +460,7 @@ unsigned int cellular_hal_IsModemDevicePresent(void);
 /**
 * @brief - Initialise the Cellular HAL
 *
-* @param[out] pstCtxInputStruct variable is a pointer, needs to parse CellularContextInitInputStruct structure to initialization cellular hal.
+* @param[in] pstCtxInputStruct variable is a pointer, needs to parse CellularContextInitInputStruct structure to initialization cellular hal.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful
@@ -781,7 +781,7 @@ typedef  struct
 *
 * @param[in] ip_request_type variable is from the enumerated datatype CellularNetworkIPType_t which receives IP configuration for stopped network from driver.
 * @param[in] pstProfileInput - Here needs to pass profile from structure CellularProfileStruct to start network. If NULL then it should take it default profile otherwise start based on input.
-* @param[out] pstCBStruct - Here needs to fill CB function pointer for packet and ip status from the structure CellularNetworkCBStruct.
+* @param[in] pstCBStruct - Here needs to fill CB function pointer for packet and ip status from the structure CellularNetworkCBStruct.
 *
 * @return The status of the operation
 * @retval RETURN_OK if successful

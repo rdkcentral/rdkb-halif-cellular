@@ -45,13 +45,7 @@
 #include <pthread.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <glib.h>
-#include <glib/gprintf.h>
-#include <gio/gio.h>
-#include <glib-unix.h>
-#ifndef CELLULAR_MGR_LITE
-#include <libqmi-glib.h>
-#endif
+
 /**********************************************************************
                 STRUCTURE AND CONSTANT DEFINITIONS
 **********************************************************************/
